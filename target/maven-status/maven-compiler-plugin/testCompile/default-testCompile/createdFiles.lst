@@ -1,0 +1,6 @@
+com\mycompany\app\AppTest.class
+com\mycompany\app\SpringAnnotationTest.class
+com\mycompany\app\JunitTest1.class
+com\mycompany\app\AllTests.class
+com\mycompany\app\TestMyApp.class
+com\mycompany\app\JunitTest2.class

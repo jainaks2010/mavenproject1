@@ -1,0 +1,53 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.mycompany.data">
+<class name="Event" table="Events">
+	<id column="event_id" name="eventId" >
+		<generator class="native">
+		</generator> 
+	</id>
+	<property name="eventDate" column="event_date" type="timestamp" />
+	<property name="name"/>
+	<set name="lights" cascade="all" lazy="true" table="lights" inverse="true">
+		<key column="event_id"></key>
+		<one-to-many class="Light"  />
+	</set>
+</class>
+<class name="Light" table="lights">
+	<id name="lightId" column="light_id" >
+		<generator class="increment"></generator>
+	</id>
+	<property name="lightName" column="light_name"></property>
+	<many-to-one name="event" column="event_id" cascade="all"></many-to-one>
+</class>
+<class name="Person" table="Persons">
+	<id column="person_id" name="personId">
+		<generator class="native">
+		</generator> 
+	</id>
+	<property name="age" />
+	<property name="name"/>
+	<set name="events" table="event_person" lazy="true" sort="com.mycompany.data.EventSorter" >
+		<key column="p_id" />
+		<many-to-many class="Event" column="e_id" />
+	</set>
+	<map name="clothesInformation" table="person_clothes" lazy="true">
+		<key column="person_id" />
+		<index column="cloth_type" type="string"></index>
+		<element column="cloth_name" type="string" not-null="true"></element>
+	</map>
+</class>
+<class name="Category" table="categories">
+	<id name="categoryId" column="category_id">
+		<generator class="native"></generator>
+	</id>
+	<property name="categoryName" column="category_name" />
+	<many-to-one name="parentCategory" class="Category" cascade="all" column="parent_category_id"/>
+	<set name="subCategories" table="categories" lazy="true" inverse="true" cascade="all">
+		<key column="parent_category_id"></key>
+		<one-to-many class="Category"></one-to-many>
+	</set>
+</class>
+</hibernate-mapping>

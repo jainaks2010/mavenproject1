@@ -62,7 +62,7 @@ public class ServiceImpl implements Service{
 	}
 
 	@Override
-	@Transactional(propagation=Propagation.REQUIRED,isolation=Isolation.SERIALIZABLE)
+	@Transactional(propagation=Propagation.REQUIRED,isolation=Isolation.READ_UNCOMMITTED)
 	public Event getEvent(String name) {
 		Event event = dao.getEventByName(name);
 		return event;
@@ -74,7 +74,7 @@ public class ServiceImpl implements Service{
 	}
 
 	@Override
-	@Transactional(propagation=Propagation.REQUIRED,isolation=Isolation.SERIALIZABLE)
+	@Transactional(propagation=Propagation.REQUIRED,isolation=Isolation.READ_UNCOMMITTED)
 	public boolean deleteEventByName(String name) {
 		boolean deleteEventsByName = dao.deleteEventsByName(name);
 		return deleteEventsByName;

@@ -2,11 +2,11 @@ package com.mycompany.demo;
 
 import com.mycompany.data.Event;
 
-public class ReadUncommitedDemo extends Demo {
+public class ReadUncommitedDemo extends Demo implements Restorable {
 
 	@Override
 	public void demonstrate() {
-		getService().deleteEventByName("dandia");
+		restore();
 		Thread thread1 = new Thread(new Runnable() {
 			@Override
 			public void run() {
@@ -14,6 +14,7 @@ public class ReadUncommitedDemo extends Demo {
 			}
 		},"First"); 
 		thread1.start();
+		
 		Thread thread2 = new Thread(new Runnable() {
 			@Override
 			public void run() {
@@ -23,11 +24,14 @@ public class ReadUncommitedDemo extends Demo {
 				}else{
 					logger.info("Event is null");
 				}
-				
 			}
 		},"Second"); 
 		thread2.start();
+	}
 
+	@Override
+	public void restore() {
+		getService().deleteEventByName("dandia");
 	}
 
 }

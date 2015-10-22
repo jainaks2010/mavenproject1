@@ -69,14 +69,40 @@ public class ServiceImpl implements Service{
 	}
 
 	@Override
-	public Event getEvent(Long eventId) {
-		return dao.getEventById(eventId);
-	}
-
-	@Override
 	@Transactional(propagation=Propagation.REQUIRED,isolation=Isolation.READ_UNCOMMITTED)
 	public boolean deleteEventByName(String name) {
 		boolean deleteEventsByName = dao.deleteEventsByName(name);
 		return deleteEventsByName;
 	}
+	
+	@Override
+	@Transactional(propagation=Propagation.REQUIRED,isolation=Isolation.READ_COMMITTED)
+	public Event getEvent(Long eventId) {
+		return dao.getEventById(eventId);
+	}
+	
+	@Override
+	@Transactional(propagation=Propagation.REQUIRED,isolation=Isolation.READ_COMMITTED)
+	public void updateEvent(Event event) {
+		dao.updateEvent(event);
+		logger.info("Updated with event name:"+event.getName());
+	}
+	
+	@Override
+	@Transactional(propagation=Propagation.REQUIRED,isolation=Isolation.READ_COMMITTED)
+	public void readCommited(Long eventId){
+		Event event = getEvent(eventId);
+		if(event != null){
+			logger.info("Event name before sleeping:"+event.getName());
+			try {
+				Thread.sleep(15000);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+			event = getEvent(eventId);
+			logger.info("Event name after sleeping:"+event.getName());
+		}
+		
+	}
+
 }

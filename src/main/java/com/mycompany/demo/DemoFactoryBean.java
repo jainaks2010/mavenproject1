@@ -21,6 +21,9 @@ public class DemoFactoryBean {
 				}else if(demoOf.name().equals(Demo.of.READ_UNCOMITTED.name()) && demostrate instanceof ReadUncommitedDemo ){
 					demo = demostrate;
 					break;
+				}else if(demoOf.name().equals(Demo.of.READ_COMMITED.name()) && demostrate instanceof ReadCommitedDemo ){
+					demo = demostrate;
+					break;
 				}
 			}
 		}

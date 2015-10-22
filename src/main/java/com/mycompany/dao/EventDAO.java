@@ -11,5 +11,7 @@ public interface EventDAO {
 	public Event getEventById(Long id);
 	
 	public boolean deleteEventsByName(String name);
+	
+	public void updateEvent(Event event);
 
 }

@@ -29,6 +29,7 @@ public class EventDAOImpl extends HibernateDaoSupport implements EventDAO{
 
 	@Override
 	public Event getEventById(Long id) {
+		currentSession().clear();
 		Object object = currentSession().get(Event.class, id);
 		return (Event) object;
 	}
@@ -39,5 +40,10 @@ public class EventDAOImpl extends HibernateDaoSupport implements EventDAO{
 		Query query = currentSession().createQuery(hql);
 		int affectedRows = query.executeUpdate();
 		return affectedRows > 0;
+	}
+
+	@Override
+	public void updateEvent(Event event) {
+		currentSession().update(event);
 	}
 }

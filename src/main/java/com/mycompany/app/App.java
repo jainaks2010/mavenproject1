@@ -21,7 +21,7 @@ public class App
     	
         ApplicationContext applicationContext = new ClassPathXmlApplicationContext(paths);
         final DemoFactoryBean demoFactoryBean = applicationContext.getBean(DemoFactoryBean.class);
-        Demo demo = demoFactoryBean.getDemoOf(Demo.of.READ_UNCOMITTED);
+        Demo demo = demoFactoryBean.getDemoOf(Demo.of.READ_COMMITED);
         demo.demonstrate();
     }
 }

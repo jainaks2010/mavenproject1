@@ -15,4 +15,8 @@ public interface Service {
 	Event getEvent(Long eventId);
 	
 	boolean deleteEventByName(String name);
+
+	void updateEvent(Event event);
+
+	void readCommited(Long eventId);
 }

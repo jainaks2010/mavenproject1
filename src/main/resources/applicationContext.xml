@@ -20,6 +20,7 @@
 	  	    <ref bean="multipleThreadInsert"/>
 	  	    <ref bean="readUncommitedDemo" />
 	  	    <ref bean="readCommitedDemo" />
+	  	    <ref bean="readrepeatableDemo" />
 	   </set>
 	  </property>
 	</bean>
@@ -27,6 +28,7 @@
 	<bean id="multipleThreadInsert" class="com.mycompany.demo.MultipleThreadInsertDemo" />
 	<bean id="readUncommitedDemo" class="com.mycompany.demo.ReadUncommitedDemo" />
 	<bean id="readCommitedDemo" class="com.mycompany.demo.ReadCommitedDemo" />
+	<bean id="readrepeatableDemo" class="com.mycompany.demo.ReadRepeatable" />
 	
 
 	<bean id="service" class="com.mycompany.service.ServiceImpl" />

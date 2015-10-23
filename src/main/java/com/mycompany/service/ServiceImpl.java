@@ -76,7 +76,7 @@ public class ServiceImpl implements Service{
 	}
 	
 	@Override
-	@Transactional(propagation=Propagation.REQUIRED,isolation=Isolation.READ_COMMITTED)
+	@Transactional(propagation=Propagation.REQUIRED,isolation=Isolation.REPEATABLE_READ)
 	public Event getEvent(Long eventId) {
 		return dao.getEventById(eventId);
 	}
@@ -103,6 +103,22 @@ public class ServiceImpl implements Service{
 			logger.info("Event name after sleeping:"+event.getName());
 		}
 		
+	}
+
+	@Override
+	@Transactional(propagation=Propagation.REQUIRED,isolation=Isolation.REPEATABLE_READ)
+	public void readRepeatable(Long eventId) {
+		Event event = getEvent(eventId);
+		if(event != null){
+			logger.info("Event name before sleeping:"+event.getName());
+			try {
+				Thread.sleep(15000);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+			event = getEvent(eventId);
+			logger.info("Event name after sleeping:"+event.getName());
+		}
 	}
 
 }

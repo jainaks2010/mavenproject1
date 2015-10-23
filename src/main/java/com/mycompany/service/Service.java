@@ -19,4 +19,6 @@ public interface Service {
 	void updateEvent(Event event);
 
 	void readCommited(Long eventId);
+	
+	void readRepeatable(Long eventId);
 }
